@@ -1,0 +1,148 @@
+@use '../abstracts' as *;
+
+// =========================================================
+// Home hero: "sky" (aozora blue) above the horizon, "sea" (navy) below.
+// Build = sky, protect = sea. The horizon line is the site's signature motif.
+// =========================================================
+.hero {
+  color: #fff;
+
+  &__sky {
+    position: relative; overflow: hidden;
+    background: var(--sky);
+    padding-block: clamp(48px, 8vw, 112px) clamp(48px, 7vw, 96px);
+  }
+  &__grid {
+    position: relative;
+    display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    column-gap: clamp(32px, 5vw, 80px); align-items: center;
+    @include mq('lg') { grid-template-columns: 1fr; row-gap: var(--s-7); }
+    @include mq('md') { row-gap: var(--s-6); }
+  }
+  .eyebrow { color: rgba(255, 255, 255, .8); }
+  &__title { margin-top: var(--s-5); }
+  &__tagline {
+    display: flex; align-items: center; gap: var(--s-3); margin-top: var(--s-5);
+    font-size: clamp(.9375rem, .9rem + .2vw, 1.0625rem); font-weight: 500; letter-spacing: .02em;
+    color: rgba(255, 255, 255, .88);
+    &::before { content: ""; width: 28px; height: 2px; background: var(--yellow); flex: none; }
+  }
+  &__lead { margin-top: var(--s-6); max-width: 36em; color: rgba(255, 255, 255, .92); }
+  &__actions { margin-top: var(--s-7); @include mq('md') { margin-top: var(--s-6); } }
+  &__visual {
+    justify-self: end; width: 100%; max-width: 440px;
+    @include mq('lg') { justify-self: start; max-width: 380px; }
+    @include mq('md') { justify-self: center; max-width: 400px; }
+  }
+
+  &__sea {
+    position: relative; background: var(--navy);
+    padding-block: var(--s-6) clamp(40px, 5vw, 56px);
+    // the horizon: a yellow sunrise segment, then a thin light line
+    &::before {
+      content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px;
+      background: linear-gradient(90deg, var(--yellow) 0 18%, rgba(255, 255, 255, .28) 18% 100%);
+    }
+  }
+  &__sea-labels {
+    display: flex; justify-content: space-between; gap: var(--s-4); margin-bottom: var(--s-5);
+    @include mono-label; color: var(--cyan);
+    span:last-child { @include mq('sm') { display: none; } }
+  }
+}
+
+// Key figures
+.facts {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: var(--s-6);
+  @include mq('md') { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--s-6); }
+  .hero & { margin-top: 0; }
+}
+.fact {
+  padding-left: var(--s-5); border-left: 1px solid var(--line);
+  &:first-child { padding-left: 0; border-left: 0; }
+  @include mq('md') { &:nth-child(3) { padding-left: 0; border-left: 0; } }
+
+  &__value {
+    display: flex; align-items: baseline; gap: 6px;
+    font-size: clamp(2.25rem, 1.6rem + 2vw, 3.25rem); font-weight: 500; line-height: 1;
+    letter-spacing: -.01em; font-variant-numeric: tabular-nums;
+  }
+  &__unit { font-size: .9375rem; font-weight: 500; letter-spacing: .02em; color: var(--ink-2); }
+  &__label { margin-top: var(--s-3); font-size: .875rem; line-height: 1.6; color: var(--ink-2); }
+  &__note { display: block; font-size: .75rem; color: var(--muted); }
+
+  .on-dark & { border-left-color: rgba(255, 255, 255, .16); }
+  .on-dark &__unit { color: var(--cyan); }
+  .on-dark &__label { color: rgba(255, 255, 255, .8); }
+  .on-dark &__note { color: rgba(255, 255, 255, .6); }
+}
+
+// Build / Protect loop (static SVG). Default colours for light backgrounds,
+// overridden for the blue hero.
+.loop {
+  width: 100%; height: auto; overflow: visible;
+  &__base { fill: none; stroke: var(--line); stroke-width: 1; }
+  &__arc { fill: none; stroke-width: 3; stroke-linecap: round;
+    &--build { stroke: var(--sky); }
+    &--protect { stroke: var(--yellow); }
+  }
+  &__node { stroke: var(--paper); stroke-width: 4;
+    &--build { fill: var(--sky); }
+    &--protect { fill: var(--yellow); }
+  }
+  &__num { font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em; fill: var(--muted); }
+  &__name { font-family: var(--font-sans); font-size: 14px; font-weight: 700; fill: var(--ink); }
+  &__center-en { font-family: var(--font-mono); font-size: 10px; letter-spacing: .26em; fill: var(--muted); }
+  &__center-ja { font-family: var(--font-sans); font-size: 20px; font-weight: 700; fill: var(--ink); letter-spacing: .04em; }
+
+  .hero & {
+    .loop__base { stroke: rgba(255, 255, 255, .28); }
+    .loop__arc--build { stroke: #fff; }
+    .loop__node { stroke: var(--sky); }
+    .loop__node--build { fill: #fff; }
+    .loop__num, .loop__center-en { fill: rgba(255, 255, 255, .72); }
+    .loop__name, .loop__center-ja { fill: #fff; }
+  }
+}
+.loop-legend {
+  display: flex; justify-content: center; gap: var(--s-6); margin-top: var(--s-4);
+  font-family: var(--font-mono); font-size: .6875rem; letter-spacing: .14em; color: var(--muted);
+  li { display: flex; align-items: center; gap: var(--s-2); }
+  li::before { content: ""; width: 18px; height: 3px; border-radius: 2px; background: var(--c); }
+  b { font-family: var(--font-sans); font-weight: 700; letter-spacing: .04em; color: var(--ink); }
+  .hero & { color: rgba(255, 255, 255, .72); b { color: #fff; } }
+}
+
+// two-column figures (e.g. Parijat page): reset dividers at the start of each row
+.facts--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--s-6);
+  .fact:nth-child(odd) { padding-left: 0; border-left: 0; }
+  .fact:nth-child(even) { padding-left: var(--s-5); border-left: 1px solid var(--line); }
+}
+
+// ---------------------------------------------------------
+// Original (v1) hero illustration, restored. Static, recoloured:
+// build = white, protect = yellow, on the blue hero.
+// ---------------------------------------------------------
+.loop--v1 {
+  .loop__inner { fill: none; stroke: var(--line); stroke-width: 1; stroke-dasharray: 2 6; }
+  .loop__arc { stroke-width: 2.5; }
+  .loop__node { stroke-width: 2; fill: var(--surface); }
+  .loop__node--build { stroke: var(--sky); }
+  .loop__node--protect { stroke: var(--yellow); }
+  .loop__name { font-size: 13px; }
+  .loop__center-ja { font-size: 19px; }
+  .loop__center-sub { font-family: var(--font-sans); font-size: 11px; letter-spacing: .08em; fill: var(--muted); }
+  .loop__legend { font-family: var(--font-mono); font-size: 10px; letter-spacing: .16em; fill: var(--muted); }
+  .loop__key { stroke-width: 2.5; }
+  .loop__key--build { stroke: var(--sky); }
+  .loop__key--protect { stroke: var(--yellow); }
+
+  .hero & {
+    .loop__inner { stroke: rgba(255, 255, 255, .3); }
+    .loop__node { fill: var(--sky); }
+    .loop__node--build { stroke: #fff; }
+    .loop__node--protect { stroke: var(--yellow); }
+    .loop__center-sub, .loop__legend { fill: rgba(255, 255, 255, .75); }
+    .loop__key--build { stroke: #fff; }
+  }
+}

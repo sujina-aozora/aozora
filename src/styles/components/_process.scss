@@ -1,0 +1,57 @@
+@use '../abstracts' as *;
+
+// Interactive 7-step process (ARIA tabs) with collaboration lanes
+.process {
+  &__tabs {
+    display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: var(--s-2);
+  }
+  &__tab {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 2px;
+    padding: 14px 4px 0 0; border: 0; border-top: 2px solid var(--line); background: none;
+    text-align: left; cursor: pointer; color: var(--muted);
+    transition: border-color var(--dur-1), color var(--dur-1);
+    span { font-family: var(--font-mono); font-size: .6875rem; letter-spacing: .14em; }
+    b { font-size: .8125rem; font-weight: 500; line-height: 1.5; }
+    &:hover { color: var(--ink); border-top-color: var(--line-strong); }
+    &[aria-selected="true"] { border-top-color: var(--sky); color: var(--ink);
+      span { color: var(--sky); } b { font-weight: 700; }
+    }
+    @include mq('md') { b { display: none; } padding-bottom: var(--s-2); align-items: center; span { font-size: .8125rem; } }
+  }
+
+  &__panel {
+    margin-top: var(--s-6); padding: clamp(24px, 4vw, 48px);
+    border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);
+    &:focus-visible { outline-offset: 4px; }
+    &[hidden] { display: none; }
+  }
+  &__head { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s-6);
+    @include mq('lg') { grid-template-columns: 1fr; gap: var(--s-5); }
+  }
+  &__step { @include mono-label(.75rem); color: var(--sky); }
+  &__title { margin-top: var(--s-2); }
+  &__desc { margin-top: var(--s-3); color: var(--ink-2); line-height: 1.85; }
+  &__facts { display: grid; gap: var(--s-3); align-content: start; }
+  &__fact { padding: 16px 20px; border-radius: var(--radius-sm); background: var(--paper);
+    dt { @include mono-label(.6875rem); color: var(--muted); }
+    dd { margin-top: 2px; font-weight: 500; line-height: 1.7; }
+  }
+  &__rule { margin-top: var(--s-5); font-size: .875rem; color: var(--muted); }
+}
+
+.lanes {
+  margin-top: var(--s-6); border-top: 1px solid var(--line);
+  &__row {
+    display: grid; grid-template-columns: 200px minmax(0, 1fr); align-items: center; gap: var(--s-4);
+    padding: 14px 0; border-bottom: 1px solid var(--line);
+    @include mq('sm') { grid-template-columns: 1fr; gap: 4px; }
+  }
+  &__who { display: flex; align-items: center; gap: var(--s-2); font-size: .875rem; font-weight: 700;
+    i { width: 8px; height: 8px; border-radius: 50%; background: var(--c); flex: none; }
+  }
+  &__what { display: flex; align-items: center; gap: var(--s-3); font-size: .9375rem; line-height: 1.7; color: var(--ink-2);
+    @include mq('sm') { padding-left: 16px; }
+  }
+  &__row.is-off { .lanes__who { color: var(--muted); font-weight: 500; } .lanes__who i { opacity: .3; } }
+  &__none { color: var(--line-strong); }
+}

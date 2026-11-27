@@ -1,0 +1,82 @@
+// =========================================================
+// Design tokens: the single source for colour, type, space, layout and motion.
+// Direction A "青空 Daylight": sky (build) above the horizon, sea (protect) below.
+// Palette: deep navy, white and shades of blue, with yellow as the single accent.
+// Colours are harmonised with the observed brand materials. They are NOT the
+// official values; replace them here when supplied.
+// Every token is emitted as a CSS custom property in base/_root.scss.
+// =========================================================
+
+$colors: (
+  // text
+  'ink':          #0A1A33,
+  'ink-2':        #3D4A5E,
+  'muted':        #5D6878,
+  // lines
+  'line':         #DFE4EB,
+  'line-strong':  #C6CFDA,
+  // surfaces
+  'paper':        #F4F7FB,   // very light blue-grey (replaces sand)
+  'surface':      #FFFFFF,
+  'mist':         #EAF3FF,   // light sky tint
+  'navy':         #0B2A5B,   // deep sea (dark bands, protect)
+  'navy-2':       #123A75,
+  // blues
+  'sky':          #1668E3,   // aozora blue (primary)
+  'sky-hover':    #0F55C2,
+  'sky-soft':     #EAF3FF,
+  'cyan':         #7DB8FF,   // light sky: labels/accents on dark backgrounds
+  'azure':        #0E8AD6,   // second blue: entry services / KH Plus
+  'azure-text':   #0A6FAD,   // azure for text/icons on light backgrounds (AA)
+  'azure-soft':   #E3F3FC,
+  // single accent
+  'yellow':       #FFC531,   // calls to action (with ink text), highlights, Nepal sun
+  'yellow-hover': #F5B400,
+  'yellow-text':  #7A5A00,   // yellow-family colour for text/icons on light backgrounds (AA)
+  'yellow-soft':  #FFF4D1,
+  'ok':           #1668E3,
+);
+
+// Meaning → colour. Change meanings here, not in components.
+$roles: (
+  'accent-sales':      'yellow',
+  'accent-efficiency': 'sky',
+  'accent-protect':    'navy',
+  'accent-entry':      'azure',
+  'accent-build':      'sky',
+  'accent-group':      'azure',     // KH Plus
+  'accent-nepal':      'yellow',    // Parijat (sun over the Himalaya)
+);
+
+$font-sans: '"IBM Plex Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif';
+$font-mono: '"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace';
+
+$space: (
+  1: 4px, 2: 8px, 3: 12px, 4: 16px, 5: 24px,
+  6: 32px, 7: 48px, 8: 64px, 9: 96px, 10: 128px,
+);
+
+$layout: (
+  'container': 1200px,
+  'gutter': 32px,
+  'gutter-sm': 20px,
+  'header-h': 76px,
+  'header-h-sm': 64px,
+  'radius-sm': 6px,
+  'radius': 14px,
+  'section-y': clamp(80px, 9vw, 128px),
+  'head-gap': clamp(40px, 5vw, 64px),
+);
+
+$motion: (
+  'ease': cubic-bezier(.2, .7, .2, 1),
+  'dur-1': 150ms,
+  'dur-2': 250ms,
+);
+
+$breakpoints: (
+  'sm': 640px,
+  'md': 768px,
+  'lg': 960px,
+  'xl': 1080px,
+);

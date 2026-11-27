@@ -1,0 +1,59 @@
+@use '../abstracts' as *;
+
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--c-fill, var(--c)); flex: none; }
+
+// Group legend above the grid
+.svc-legend {
+  display: flex; flex-wrap: wrap; gap: var(--s-3); margin-bottom: var(--s-5);
+  li { display: inline-flex; align-items: center; gap: var(--s-2); padding: 6px 14px 6px 8px; border-radius: 999px;
+    background: var(--soft); color: var(--c); font-size: .875rem; font-weight: 700; }
+  svg { width: 18px; height: 18px; }
+  span { font-family: var(--font-mono); font-size: .75rem; font-weight: 500; opacity: .75; }
+}
+
+// Grid of service cards
+.svc-grid {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-4);
+  @include mq('xl') { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @include mq('sm') { grid-template-columns: 1fr; }
+}
+
+.svc-card {
+  position: relative; display: flex; flex-direction: column; height: 100%;
+  padding: 28px; border-radius: var(--radius);
+  background: var(--surface); border: 1px solid var(--line);
+  text-decoration: none; overflow: hidden;
+  transition: border-color var(--dur-2) var(--ease), box-shadow var(--dur-2) var(--ease);
+  // accent bar at the top in the group's colour
+  &::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: var(--c-fill); }
+  @include mq('sm') { padding: 24px 20px; }
+  &:hover { border-color: var(--c-fill); box-shadow: 0 14px 32px rgba(10, 26, 51, .10); }
+
+  &__top { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--s-3); }
+  &__num { font-family: var(--font-mono); font-size: .75rem; letter-spacing: .14em; color: var(--muted); }
+  &__title { margin-top: var(--s-5); font-size: 1.1875rem; font-weight: 700; line-height: 1.5; letter-spacing: .02em; font-feature-settings: "palt"; }
+  &__desc { margin-top: var(--s-2); font-size: .9375rem; line-height: 1.8; color: var(--ink-2); }
+  &__pain {
+    margin-top: var(--s-5); padding: 12px 14px; border-radius: 10px; background: var(--paper);
+    font-size: .8125rem; line-height: 1.7; color: var(--ink);
+    b { display: block; font-size: .6875rem; font-weight: 500; letter-spacing: .06em; color: var(--muted); }
+  }
+  &__more { display: inline-flex; align-items: center; gap: 6px; margin-top: auto; padding-top: var(--s-4);
+    font-size: .875rem; font-weight: 700; color: var(--c);
+    svg { width: 16px; height: 16px; transition: transform var(--dur-2) var(--ease); }
+  }
+  &:hover &__more svg { transform: translateX(3px); }
+}
+
+.callout {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-5) var(--s-7);
+  margin-top: var(--s-7); padding: var(--s-6);
+  border-radius: var(--radius); background: var(--soft, var(--mist));
+  p { flex: 1 1 420px; font-size: .9375rem; line-height: 1.85; color: var(--ink-2); }
+  b { font-weight: 700; color: var(--ink); }
+  .icon-tile { background: var(--surface); }
+  @include mq('sm') { padding: var(--s-5); .btn { width: 100%; } }
+}
+.callout__lead { display: flex; align-items: center; gap: var(--s-5); flex: 1 1 480px;
+  @include mq('sm') { align-items: flex-start; }
+}

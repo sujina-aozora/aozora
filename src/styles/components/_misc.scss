@@ -1,0 +1,154 @@
+@use '../abstracts' as *;
+
+// ---------------------------------------------------------
+// FAQ (native <details>)
+// ---------------------------------------------------------
+.faq {
+  border-top: 1px solid var(--line);
+  &__item { border-bottom: 1px solid var(--line); }
+  &__q {
+    display: grid; grid-template-columns: 32px minmax(0, 1fr) 24px; align-items: center; gap: var(--s-3);
+    padding: 22px 0; cursor: pointer; list-style: none;
+    font-weight: 700; line-height: 1.6;
+    &::-webkit-details-marker { display: none; }
+    &::before { content: "Q"; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: var(--sky-soft); font-family: var(--font-mono); color: var(--sky); }
+    &::after { content: ""; justify-self: end; width: 12px; height: 12px;
+      border-right: 1.5px solid var(--muted); border-bottom: 1.5px solid var(--muted);
+      transform: rotate(45deg) translate(-3px, -3px); transition: transform var(--dur-2) var(--ease); }
+    &:hover { color: var(--sky); }
+  }
+  &__item[open] &__q::after { transform: rotate(225deg) translate(-2px, -2px); }
+  &__a {
+    display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: var(--s-3);
+    padding: 0 40px 24px 0; color: var(--ink-2); line-height: 1.9;
+    &::before { content: "A"; font-family: var(--font-mono); color: var(--muted); }
+  }
+}
+
+// ---------------------------------------------------------
+// Spec table (definition rows)
+// ---------------------------------------------------------
+.spec-table {
+  border-top: 1px solid var(--line);
+  > div { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: var(--s-5); padding: 20px 0; border-bottom: 1px solid var(--line);
+    @include mq('sm') { grid-template-columns: 1fr; gap: 4px; padding: 16px 0; }
+  }
+  dt { font-size: .875rem; font-weight: 700; line-height: 1.8; }
+  dd { line-height: 1.85; color: var(--ink-2); }
+  dd small { display: block; font-size: .8125rem; color: var(--muted); }
+}
+
+// ---------------------------------------------------------
+// Filter buttons
+// ---------------------------------------------------------
+.filter {
+  display: flex; flex-wrap: wrap; gap: var(--s-2); margin-bottom: var(--s-6);
+  &__btn {
+    display: inline-flex; align-items: center; gap: var(--s-2); min-height: 40px; padding: 6px 16px;
+    border: 1px solid var(--line-strong); border-radius: 999px; background: var(--surface);
+    font-size: .875rem; cursor: pointer; transition: border-color var(--dur-1), background-color var(--dur-1), color var(--dur-1);
+    &:hover { border-color: var(--ink); }
+    &[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: #fff; .dot { box-shadow: 0 0 0 2px var(--ink); } }
+    small { font-family: var(--font-mono); font-size: .75rem; opacity: .7; }
+  }
+}
+
+// ---------------------------------------------------------
+// CTA band (navy) + horizontal steps
+// ---------------------------------------------------------
+.cta {
+  &__steps {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-6);
+    margin-top: var(--head-gap);
+    @include mq('lg') { grid-template-columns: 1fr; gap: var(--s-5); }
+  }
+  &__step { position: relative; padding: 24px; border-radius: var(--radius); background: rgba(255, 255, 255, .1);
+    .icon-tile { --size: 48px; background: #fff; color: var(--sky); margin-bottom: var(--s-4); }
+    &:first-child .icon-tile { background: var(--yellow); color: var(--ink); }
+    p:first-of-type { @include mono-label(.6875rem); color: rgba(255, 255, 255, .8); }
+    h3 { margin-top: var(--s-2); font-size: 1.125rem; font-weight: 700; }
+    p + h3 + p { margin-top: var(--s-2); font-size: .9375rem; line-height: 1.85; color: rgba(255, 255, 255, .88); }
+  }
+  &__contact {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-3);
+    margin-top: var(--s-8);
+    @include mq('lg') { grid-template-columns: 1fr; }
+  }
+  &__method {
+    display: grid; gap: 2px; padding: 20px 24px; border: 1px solid rgba(255, 255, 255, .4); border-radius: var(--radius);
+    text-decoration: none; color: #fff; transition: border-color var(--dur-1), background-color var(--dur-1);
+    &:hover { border-color: #fff; }
+    span { display: flex; align-items: center; gap: var(--s-2); @include mono-label(.6875rem); color: rgba(255, 255, 255, .8);
+      svg { width: 15px; height: 15px; } }
+    b { font-family: var(--font-mono); font-size: 1.0625rem; font-weight: 500; overflow-wrap: anywhere; }
+    small { font-size: .75rem; color: rgba(255, 255, 255, .75); }
+    &--primary { background: var(--yellow); border-color: var(--yellow); color: var(--ink);
+      &:hover { background: var(--yellow-hover); border-color: var(--yellow-hover); }
+      span { color: var(--ink); opacity: .75; } small { color: var(--ink); opacity: .7; }
+      b { font-family: var(--font-sans); font-weight: 700; }
+    }
+  }
+}
+
+// ---------------------------------------------------------
+// Partner band (KH Plus, compact)
+// ---------------------------------------------------------
+.partner {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s-5) clamp(32px, 5vw, 80px); align-items: start;
+  @include mq('lg') { grid-template-columns: 1fr; }
+  &__name { display: flex; align-items: center; gap: var(--s-3); margin-top: var(--s-4); }
+  &__pair { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: stretch; gap: var(--s-2); margin-top: var(--s-5);
+    @include mq('sm') { grid-template-columns: 1fr; }
+  }
+  &__side { padding: 18px 20px; border-radius: var(--radius-sm); background: var(--surface); font-size: .875rem; line-height: 1.7;
+    border-top: 4px solid var(--c-fill, var(--c));
+    b { display: block; font-size: .9375rem; }
+    .section--paper & { background: var(--surface); }
+  }
+  &__join { display: grid; place-items: center; color: var(--muted); svg { width: 18px; height: 18px; } }
+}
+
+// ---------------------------------------------------------
+// Statement (mission)
+// ---------------------------------------------------------
+.statement {
+  font-size: clamp(1.375rem, 1.05rem + 1.4vw, 2.125rem); font-weight: 700; line-height: 1.65; letter-spacing: .02em;
+  font-feature-settings: "palt";
+  em { font-style: normal; color: var(--sky); box-shadow: inset 0 -.35em 0 var(--yellow-soft); }
+}
+
+// ---------------------------------------------------------
+// Mail draft form (contact)
+// ---------------------------------------------------------
+.form {
+  display: grid; gap: var(--s-5);
+  &__row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-5);
+    @include mq('sm') { grid-template-columns: 1fr; } }
+  &__field { display: grid; gap: var(--s-2); }
+  &__label { font-size: .875rem; font-weight: 700;
+    small { margin-left: var(--s-2); font-weight: 400; color: var(--muted); } }
+  &__input, &__textarea {
+    width: 100%; padding: 12px 14px; border: 1px solid var(--line-strong); border-radius: var(--radius-sm);
+    background: var(--surface); font: inherit; color: var(--ink); line-height: 1.6;
+    &:focus { outline: 2px solid var(--sky); outline-offset: 0; border-color: var(--sky); }
+  }
+  &__textarea { min-height: 160px; resize: vertical; }
+  &__status { min-height: 1.5em; font-size: .875rem; color: var(--ok); }
+}
+
+// ---------------------------------------------------------
+// Reveal: one quiet fade per block
+// ---------------------------------------------------------
+.js [data-reveal] { opacity: 0; transition: opacity 600ms var(--ease); }
+.js [data-reveal].is-visible { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .js [data-reveal] { opacity: 1; } }
+
+// small helpers
+.mt-5 { margin-top: var(--s-5); }
+.mt-6 { margin-top: var(--s-6); }
+.mt-7 { margin-top: var(--s-7); }
+.mt-8 { margin-top: var(--s-8); }
+.horizons-figure { margin: 0; }
+
+.on-dark .statement em { color: var(--cyan); box-shadow: none; }
+.on-dark .prose { color: rgba(255, 255, 255, .82); }

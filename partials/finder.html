@@ -1,0 +1,39 @@
+    <!-- Service Finder (shared: home + services). Content: src/js/data/finder.js -->
+    <section class="section section--paper" id="finder" aria-labelledby="finder-title">
+      <div class="container">
+        <div class="horizon">
+          <span class="horizon__index">Service Finder</span>
+          <span class="horizon__line" aria-hidden="true"></span>
+          <span class="horizon__aside">3 questions · 30 sec</span>
+        </div>
+
+        <div class="split finder" data-reveal>
+          <div class="finder__intro">
+            <h2 class="h2" id="finder-title">何を頼めばいいか、<br>わからなくても大丈夫です。</h2>
+            <p class="lead">3つの質問に答えるだけで、お悩みに合ったサービスと、最初の一歩をご案内します。所要時間は約30秒です。</p>
+            <ol class="finder__how" aria-label="診断の流れ">
+              <li class="tone-sky"><span class="icon-tile icon-tile--sm"><i data-lucide="target"></i></span><span><b>Q1</b>実現したいこと</span></li>
+              <li class="tone-sky"><span class="icon-tile icon-tile--sm"><i data-lucide="list-checks"></i></span><span><b>Q2</b>一番近いお悩み</span></li>
+              <li class="tone-sky"><span class="icon-tile icon-tile--sm"><i data-lucide="monitor"></i></span><span><b>Q3</b>現在の状況</span></li>
+              <li class="tone-yellow"><span class="icon-tile icon-tile--sm icon-tile--solid"><i data-lucide="sparkles"></i></span><span><b>Result</b>おすすめのサービスと最初の一歩</span></li>
+            </ol>
+            <p class="finder__privacy"><i data-lucide="lock"></i>入力内容はこのページ内でのみ使われ、保存・送信されることはありません。</p>
+          </div>
+
+          <div class="finder__panel" data-js="finder">
+            <ol class="finder-steps" data-js="finder-stepper" aria-label="診断の進み具合">
+              <li class="is-active" aria-current="step"><span>STEP 01</span>実現したいこと</li>
+              <li><span>STEP 02</span>お悩み</li>
+              <li><span>STEP 03</span>現在の状況</li>
+            </ol>
+            <p class="visually-hidden" data-js="finder-label" aria-live="polite">STEP 1 / 3</p>
+            <div class="finder__body" data-js="finder-body">
+              <noscript>
+                <p class="finder__q">サービス診断にはJavaScriptが必要です。</p>
+                <p class="finder__hint"><a href="services.html">サービス一覧</a>からお探しいただくか、お電話（098-989-6318）でご相談ください。</p>
+              </noscript>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>

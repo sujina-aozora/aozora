@@ -1,0 +1,37 @@
+@use '../abstracts' as *;
+
+// ---------------------------------------------------------
+// Tones: set --c (accent for text/icons), --c-fill (solid fill) and --soft (tint).
+// Palette: navy, white and blues, with yellow as the single accent.
+//   yellow = grow sales / calls to action / Nepal (Parijat)
+//   sky    = work efficiently / build / Japan team
+//   navy   = stay safe / protect / quality (the "sea" below the horizon)
+//   azure  = entry services (consulting, subsidy) / KH Plus
+// ---------------------------------------------------------
+.tone-yellow, .g-sales      { --c: var(--yellow-text); --c-fill: var(--yellow); --soft: var(--yellow-soft); --c-on-fill: var(--ink); }
+.tone-sky,    .g-efficiency { --c: var(--sky);         --c-fill: var(--sky);    --soft: var(--sky-soft);    --c-on-fill: #fff; }
+.tone-navy,   .g-protect    { --c: var(--navy);        --c-fill: var(--navy);   --soft: var(--mist);        --c-on-fill: #fff; }
+.tone-azure,  .g-entry      { --c: var(--azure-text);  --c-fill: var(--azure);  --soft: var(--azure-soft);  --c-on-fill: #fff; }
+
+// Icon tile: rounded square, tinted background, icon in accent colour
+.icon-tile {
+  display: inline-grid; place-items: center; flex: none;
+  width: var(--size, 56px); height: var(--size, 56px);
+  border-radius: calc(var(--size, 56px) * .29);
+  background: var(--soft, var(--sky-soft)); color: var(--c, var(--sky));
+  svg { width: 50%; height: 50%; }
+  &--sm { --size: 44px; }
+  &--lg { --size: 72px; }
+  &--xl { --size: 96px; }
+  // solid variant: filled accent, icon in the matching on-fill colour
+  &--solid { background: var(--c-fill, var(--sky)); color: var(--c-on-fill, #fff); }
+  .on-dark & { background: rgba(255, 255, 255, .08); color: var(--cyan); }
+}
+
+// Small pill label in accent colour
+.chip-label {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 10px; border-radius: 999px;
+  background: var(--soft, var(--sky-soft)); color: var(--c, var(--sky));
+  font-size: .75rem; font-weight: 700; letter-spacing: .02em; line-height: 1.6; white-space: nowrap;
+}

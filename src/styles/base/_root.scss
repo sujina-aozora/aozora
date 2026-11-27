@@ -1,0 +1,28 @@
+@use 'sass:map';
+@use '../abstracts' as *;
+
+// Emit all design tokens as CSS custom properties.
+:root {
+  @each $name, $value in $colors { --#{$name}: #{$value}; }
+  @each $role, $color in $roles { --#{$role}: var(--#{$color}); }
+
+  --font-sans: #{$font-sans};
+  --font-mono: #{$font-mono};
+
+  @each $step, $value in $space { --s-#{$step}: #{$value}; }
+
+  --container: #{map.get($layout, 'container')};
+  --gutter: #{map.get($layout, 'gutter')};
+  --header-h: #{map.get($layout, 'header-h')};
+  --radius-sm: #{map.get($layout, 'radius-sm')};
+  --radius: #{map.get($layout, 'radius')};
+  --section-y: #{map.get($layout, 'section-y')};
+  --head-gap: #{map.get($layout, 'head-gap')};
+
+  @each $name, $value in $motion { --#{$name}: #{$value}; }
+
+  @include mq('md') {
+    --gutter: #{map.get($layout, 'gutter-sm')};
+    --header-h: #{map.get($layout, 'header-h-sm')};
+  }
+}

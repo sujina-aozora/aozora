@@ -1,0 +1,66 @@
+@use '../abstracts' as *;
+
+.eyebrow { @include mono-label; color: var(--muted); }
+
+.h1 {
+  font-size: clamp(2.5rem, 1.1rem + 5.2vw, 5.25rem);
+  line-height: 1.18;
+  letter-spacing: .01em;
+  font-weight: 700;
+  font-feature-settings: "palt";
+}
+
+.h1--page {
+  font-size: clamp(2rem, 1.3rem + 2.8vw, 3.5rem);
+  line-height: 1.3;
+}
+
+.h2 {
+  font-size: clamp(1.75rem, 1.25rem + 1.8vw, 2.75rem);
+  line-height: 1.4;
+  letter-spacing: .02em;
+  font-weight: 700;
+  font-feature-settings: "palt";
+}
+
+.h3 {
+  font-size: clamp(1.25rem, 1.1rem + .6vw, 1.5rem);
+  line-height: 1.5;
+  letter-spacing: .02em;
+  font-weight: 700;
+  font-feature-settings: "palt";
+}
+
+.h4 {
+  font-size: 1.125rem;
+  line-height: 1.5;
+  letter-spacing: .02em;
+  font-weight: 700;
+  font-feature-settings: "palt";
+}
+
+.lead {
+  font-size: clamp(1rem, .96rem + .25vw, 1.125rem);
+  line-height: 1.95;
+  color: var(--ink-2);
+  .on-dark & { color: rgba(255, 255, 255, .78); }
+}
+
+.text-muted { color: var(--muted); }
+.text-small { font-size: .875rem; line-height: 1.8; }
+.fine { font-size: .75rem; line-height: 1.7; color: var(--muted); }
+
+.prose {
+  color: var(--ink-2);
+  > * + * { margin-top: 1em; }
+  strong { color: var(--ink); }
+}
+
+.link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-weight: 500; color: var(--sky); text-decoration: none;
+  svg { width: 16px; height: 16px; }
+  &:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .on-dark & { color: var(--cyan); }
+}
+.on-dark .eyebrow { color: var(--cyan); }

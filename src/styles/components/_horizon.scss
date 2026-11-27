@@ -1,0 +1,20 @@
+@use '../abstracts' as *;
+
+// Signature motif: a thin rule with mono labels and a short accent at the start.
+.horizon {
+  display: flex; align-items: center; gap: var(--s-4);
+  @include mono-label;
+  color: var(--muted);
+
+  &__index { color: var(--ink); white-space: nowrap; }
+  &__aside { white-space: nowrap; @include mq('sm') { display: none; } }
+  &__line {
+    position: relative; flex: 1; height: 1px; background: var(--line);
+    &::before { content: ""; position: absolute; left: 0; top: 0; width: 40px; height: 1px; background: var(--sky); }
+  }
+
+  .on-dark & { color: rgba(255, 255, 255, .55); }
+  .on-dark & &__index { color: #fff; }
+  .on-dark & &__line { background: rgba(255, 255, 255, .16); }
+  .on-dark & &__line::before { background: var(--cyan); }
+}

@@ -1,0 +1,44 @@
+@use '../abstracts' as *;
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 52px; padding: 14px 28px;
+  border: 1px solid transparent; border-radius: var(--radius-sm);
+  background: none;
+  font-size: .9375rem; font-weight: 700; letter-spacing: .04em; line-height: 1.4;
+  text-decoration: none; cursor: pointer;
+  transition: background-color var(--dur-1) var(--ease), color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease);
+
+  svg { width: 18px; height: 18px; flex: none; }
+
+  // primary call to action: yellow with ink text (contrast ~11:1)
+  &--primary { background: var(--yellow); color: var(--ink);
+    &:hover { background: var(--yellow-hover); }
+    &[disabled]:hover { background: var(--yellow); }
+  }
+  // secondary action in brand blue
+  &--blue { background: var(--sky); color: #fff;
+    &:hover { background: var(--sky-hover); }
+  }
+  // white button on coloured backgrounds
+  &--white { background: #fff; color: var(--ink);
+    &:hover { background: var(--mist); }
+  }
+  &--secondary { border-color: var(--line-strong); background: var(--surface); color: var(--ink);
+    &:hover { border-color: var(--ink); }
+  }
+  // outline on dark backgrounds
+  &--ghost { border-color: rgba(255, 255, 255, .35); color: #fff;
+    &:hover { border-color: #fff; }
+  }
+  &--sm { min-height: 40px; padding: 8px 18px; font-size: .8125rem; }
+  &--text { min-height: 44px; padding: 8px 2px; font-weight: 500; color: var(--ink-2);
+    &:hover { color: var(--sky); }
+  }
+  &[disabled] { opacity: .35; cursor: not-allowed; }
+}
+
+.btn-row {
+  display: flex; flex-wrap: wrap; gap: var(--s-3);
+  @include mq('md') { .btn { flex: 1 1 100%; } }
+}

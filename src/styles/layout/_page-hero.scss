@@ -1,0 +1,53 @@
+@use '../abstracts' as *;
+
+// Inner page header: breadcrumb → eyebrow → title → lead, with a page emblem on the right.
+// The emblem uses the page's tone (tone-*) and an icon that names the page's subject.
+.page-hero {
+  position: relative; overflow: hidden;
+  padding-block: clamp(40px, 6vw, 72px) clamp(48px, 6vw, 80px);
+  background: var(--paper);
+  border-bottom: 3px solid var(--c-fill, var(--sky));
+
+  &__grid {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-7); align-items: end;
+    @include mq('md') { grid-template-columns: 1fr; }
+  }
+  &__title { margin-top: var(--s-4); }
+  &__lead { margin-top: var(--s-5); max-width: 40em; }
+  &__actions { margin-top: var(--s-6); }
+
+  // Emblem: big tinted square with the page icon, sitting on a short horizon
+  &__art {
+    position: relative; width: clamp(160px, 18vw, 232px); aspect-ratio: 1;
+    display: grid; place-items: center;
+    border-radius: 28%; background: var(--soft, var(--sky-soft)); color: var(--c-fill, var(--sky));
+    svg { width: 44%; height: 44%; stroke-width: 1.25; }
+    &::after {
+      content: ""; position: absolute; left: -24px; right: -24px; bottom: 22%; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--c-fill, var(--sky)) 20% 80%, transparent);
+      opacity: .35;
+    }
+    @include mq('md') { display: none; }
+  }
+}
+
+.breadcrumb {
+  ol { display: flex; flex-wrap: wrap; gap: var(--s-2); margin: 0; padding: 0; list-style: none; font-size: .8125rem; color: var(--muted); }
+  li + li::before { content: "/"; margin-right: var(--s-2); color: var(--line-strong); }
+  a { text-decoration: none; &:hover { color: var(--sky); text-decoration: underline; } }
+  [aria-current="page"] { color: var(--ink-2); }
+}
+
+// in-page anchor navigation (sticky tabs on long pages)
+.page-nav {
+  position: sticky; top: var(--header-h); z-index: 40;
+  background: rgba(255, 255, 255, .97); border-bottom: 1px solid var(--line);
+  &__list { display: flex; gap: var(--s-6); overflow-x: auto; scrollbar-width: none; &::-webkit-scrollbar { display: none; } }
+  &__link {
+    display: block; padding: 16px 0; white-space: nowrap;
+    font-size: .875rem; font-weight: 500; color: var(--ink-2); text-decoration: none;
+    border-bottom: 2px solid transparent;
+    &:hover { color: var(--sky); }
+    &.is-active { color: var(--ink); border-bottom-color: var(--yellow); }
+  }
+}

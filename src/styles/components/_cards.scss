@@ -1,0 +1,124 @@
+@use '../abstracts' as *;
+
+// ---------------------------------------------------------
+// Case card (works)
+// ---------------------------------------------------------
+.case-grid {
+  display: grid; grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr)); gap: var(--s-4);
+  &--2 { --cols: 2; }
+  &--4 { --cols: 4; }
+  @include mq('xl') { --cols: 2; }
+  @include mq('sm') { --cols: 1; }
+  > li[hidden] { display: none; }
+}
+.case-card {
+  position: relative; display: flex; flex-direction: column; height: 100%; padding: 28px;
+  border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);
+  &__head { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); }
+  &__period { font-family: var(--font-mono); font-size: .8125rem; font-weight: 500; color: var(--ink-2);
+    padding: 2px 10px; border-radius: 999px; background: var(--paper); }
+  &__industry { margin-top: var(--s-5); font-size: .8125rem; font-weight: 700; color: var(--c, var(--ink-2)); }
+  &__title { margin-top: 4px; flex: 1; font-size: 1.0625rem; font-weight: 700; line-height: 1.6; font-feature-settings: "palt"; }
+  &__foot { display: flex; flex-wrap: wrap; gap: 6px; margin-top: var(--s-5); padding-top: var(--s-4); border-top: 1px solid var(--line); }
+}
+
+.tag {
+  display: inline-flex; align-items: center; gap: 6px; padding: 2px 10px;
+  border: 1px solid var(--line); border-radius: 999px;
+  font-size: .75rem; line-height: 1.7; color: var(--ink-2); background: var(--surface);
+}
+.tag-list { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+
+// ---------------------------------------------------------
+// Service detail block (services page)
+// ---------------------------------------------------------
+.svc-detail {
+  padding-block: clamp(56px, 7vw, 96px); border-top: 1px solid var(--line);
+  &:first-child, .section-head + & { border-top: 0; padding-top: 0; }
+  &:last-child { padding-bottom: 0; }
+  &[hidden] { display: none; }
+
+  &__side { display: grid; gap: var(--s-4); align-content: start; align-self: start;
+    /* not sticky: avoids a parallax-like drift next to long content */
+    @include mq('lg') { position: static; }
+  }
+  &__meta { display: flex; align-items: center; gap: var(--s-4); @include mono-label(.6875rem); color: var(--muted); }
+  &__icon { color: var(--sky); svg { width: 32px; height: 32px; } }
+  &__catch { font-size: 1.0625rem; font-weight: 500; line-height: 1.8; color: var(--ink-2); }
+  &__period { display: grid; gap: 2px; padding: 14px 18px; border-radius: var(--radius-sm); background: var(--paper);
+    .section--paper & { background: var(--surface); }
+    dt { @include mono-label(.6875rem); color: var(--muted); }
+    dd { font-weight: 700; }
+    small { display: block; font-weight: 400; font-size: .75rem; color: var(--muted); }
+  }
+  &__body { display: grid; gap: var(--s-6); }
+  &__point { padding: 20px 24px; border-left: 4px solid var(--c-fill, var(--sky)); background: var(--soft, var(--sky-soft)); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    p:first-child { @include mono-label(.6875rem); color: var(--c, var(--sky)); }
+    p + p { margin-top: 4px; line-height: 1.85; }
+  }
+  &__subhead { margin-bottom: var(--s-3); font-size: .9375rem; font-weight: 700; display: flex; align-items: center; gap: var(--s-2);
+    &::before { content: ""; width: 16px; height: 3px; border-radius: 2px; background: var(--c-fill, var(--ink)); }
+  }
+}
+
+// ---------------------------------------------------------
+// Contract type cards
+// ---------------------------------------------------------
+.contract {
+  display: flex; flex-direction: column; height: 100%; padding: 28px;
+  border: 1px solid var(--line); border-top: 4px solid var(--c-fill, var(--sky)); border-radius: var(--radius); background: var(--surface);
+  &__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--s-4); }
+  &__num { @include mono-label(.6875rem); color: var(--c, var(--sky)); }
+  &__name { margin-top: var(--s-2); font-size: 1.125rem; font-weight: 700; }
+  &__fit { margin-top: var(--s-2); font-size: .9375rem; font-weight: 500; color: var(--ink-2); }
+  dl { margin-top: var(--s-5); display: grid; gap: var(--s-4); padding-top: var(--s-4); border-top: 1px solid var(--line); }
+  dt { @include mono-label(.6875rem); color: var(--muted); }
+  dd { margin-top: 2px; font-size: .875rem; line-height: 1.8; color: var(--ink-2); }
+}
+
+// ---------------------------------------------------------
+// Location cards / contact method cards
+// ---------------------------------------------------------
+.location {
+  padding: 28px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); height: 100%;
+  &__label { @include mono-label(.6875rem); color: var(--muted); margin-top: var(--s-4); }
+  &__name { margin-top: 4px; font-size: 1.125rem; font-weight: 700; }
+  &__address { margin-top: var(--s-3); font-style: normal; font-size: .9375rem; line-height: 1.8; color: var(--ink-2); }
+  &__role { margin-top: var(--s-3); font-size: .8125rem; color: var(--muted); }
+}
+
+.contact-card {
+  display: flex; flex-direction: column; gap: var(--s-2); height: 100%; padding: 32px;
+  border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); text-decoration: none;
+  transition: border-color var(--dur-1);
+  &:hover { border-color: var(--sky); }
+  &__label { margin-top: var(--s-3); @include mono-label(.6875rem); color: var(--muted); }
+  &__value { font-family: var(--font-mono); font-size: clamp(1rem, .8rem + 1.2vw, 1.75rem); font-weight: 500; letter-spacing: .02em; color: var(--ink); overflow-wrap: anywhere; }
+  &__note { font-size: .875rem; color: var(--muted); }
+}
+
+// ---------------------------------------------------------
+// Skills (Parijat)
+// ---------------------------------------------------------
+.skills {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--s-7);
+  @include mq('md') { grid-template-columns: 1fr; }
+  li { display: grid; grid-template-columns: 150px minmax(0, 1fr) 56px; align-items: center; gap: var(--s-3);
+    padding: 12px 0; border-bottom: 1px solid var(--line); font-size: .9375rem; }
+  small { display: block; font-size: .75rem; color: var(--muted); }
+  &__bar { height: 8px; border-radius: 2px; background: var(--line); position: relative; overflow: hidden;
+    span { position: absolute; inset: 0 auto 0 0; width: calc(var(--n) / 25 * 100%); background: var(--c-fill, var(--sky)); border-radius: 2px; } }
+  &__n { font-family: var(--font-mono); font-size: .875rem; text-align: right; }
+}
+
+// Group header (services page): solid icon tile + heading
+.group-head { display: flex; align-items: center; gap: var(--s-5);
+  @include mq('sm') { gap: var(--s-4); .icon-tile { --size: 56px; } }
+}
+
+// Industry grid (works)
+.industry-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-3);
+  @include mq('lg') { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  li { display: flex; align-items: center; gap: var(--s-3); padding: 12px 14px; border-radius: var(--radius-sm); background: var(--paper); font-size: .9375rem; font-weight: 700; }
+}
+.on-dark .tag { background: rgba(255, 255, 255, .08); border-color: rgba(255, 255, 255, .2); color: #fff; }

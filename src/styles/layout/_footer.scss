@@ -1,0 +1,39 @@
+@use '../abstracts' as *;
+
+.site-footer {
+  padding-block: clamp(64px, 7vw, 96px) var(--s-6);
+  background: var(--ink); color: rgba(255, 255, 255, .72);
+  font-size: .875rem; line-height: 1.8;
+
+  &__top {
+    display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--s-7);
+    padding-bottom: var(--s-7); border-bottom: 1px solid rgba(255, 255, 255, .12);
+    @include mq('lg') { grid-template-columns: 1fr; }
+  }
+  &__brand { display: grid; gap: var(--s-4); align-content: start; color: #fff; }
+  &__tagline { color: rgba(255, 255, 255, .72); }
+  &__contact { display: grid; gap: var(--s-2); margin-top: var(--s-3);
+    a { display: inline-flex; align-items: center; gap: var(--s-2); color: #fff; text-decoration: none; font-family: var(--font-mono); }
+    a:hover { color: var(--cyan); }
+    svg { width: 15px; height: 15px; color: rgba(255, 255, 255, .5); }
+  }
+  &__cols {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-6);
+    @include mq('md') { grid-template-columns: 1fr 1fr; }
+    @include mq('sm') { grid-template-columns: 1fr; }
+  }
+  &__heading { @include mono-label(.6875rem); color: rgba(255, 255, 255, .5); margin-bottom: var(--s-3); }
+  &__links { display: grid; gap: var(--s-2);
+    a { text-decoration: none; color: rgba(255, 255, 255, .82); }
+    a:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+    svg { display: inline; width: 12px; height: 12px; vertical-align: -1px; margin-left: 2px; }
+  }
+  &__address { font-style: normal; display: grid; gap: var(--s-3);
+    b { display: block; color: #fff; font-weight: 500; }
+  }
+  &__bottom {
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s-3);
+    padding-top: var(--s-5); font-family: var(--font-mono); font-size: .75rem; letter-spacing: .06em;
+    color: rgba(255, 255, 255, .5);
+  }
+}

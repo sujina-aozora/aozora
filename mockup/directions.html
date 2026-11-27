@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Visual directions｜AOZORA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
+  <style>
+  /* ---------- page chrome (comparison page only) ---------- */
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; font-family: "IBM Plex Sans JP", sans-serif; color: #111; background: #E9EAEE; line-height: 1.8; word-break: auto-phrase; line-break: strict; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, p, ul, ol, dl, dd { margin: 0; }
+  ul, ol { list-style: none; padding: 0; }
+  svg { display: block; }
+  .mono { font-family: "IBM Plex Mono", monospace; letter-spacing: .14em; text-transform: uppercase; font-size: .75rem; font-weight: 500; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+  .intro { padding: 56px 0 32px; }
+  .intro h1 { font-size: 2rem; line-height: 1.4; }
+  .intro p { margin-top: 12px; max-width: 54em; color: #444; }
+  .jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .jump a { padding: 6px 14px; border: 1px solid #bbb; border-radius: 999px; text-decoration: none; color: #111; font-size: .875rem; background: #fff; }
+  .jump a:hover { border-color: #111; }
+
+  .dir { margin: 40px auto 72px; }
+  .dir__head { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 48px; padding: 32px; background: #fff; border-radius: 12px 12px 0 0; }
+  .dir__head h2 { font-size: 1.75rem; line-height: 1.35; margin-top: 6px; }
+  .dir__concept { color: #333; margin-top: 12px; }
+  .dir__notes { font-size: .875rem; color: #333; display: grid; gap: 10px; align-content: start; }
+  .dir__notes b { display: block; font-size: .75rem; letter-spacing: .1em; color: #666; font-weight: 500; }
+  .swatches { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; }
+  .sw { border-radius: 8px; overflow: hidden; border: 1px solid rgba(0,0,0,.08); background: #fff; font-size: .75rem; }
+  .sw i { display: block; height: 56px; }
+  .sw span { display: block; padding: 8px 10px; line-height: 1.5; }
+  .sw b { display: block; font-size: .8125rem; }
+  .frame { border-radius: 0 0 12px 12px; overflow: hidden; box-shadow: 0 1px 0 rgba(0,0,0,.06); }
+  .label { padding: 10px 32px; background: #111; color: #fff; font-size: .75rem; }
+  @media (max-width: 860px) { .dir__head { grid-template-columns: 1fr; padding: 24px; } }
+
+  /* shared sample layout */
+  .s-container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+  @media (max-width: 640px) { .s-container { padding: 0 20px; } }
+  .btn { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 14px 26px; border-radius: 6px; font-weight: 700; font-size: .9375rem; text-decoration: none; border: 1px solid transparent; }
+  .btn svg { width: 18px; height: 18px; }
+  .cards3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  @media (max-width: 960px) { .cards3 { grid-template-columns: 1fr; } }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 48px; align-items: center; }
+  @media (max-width: 960px) { .hero-grid { grid-template-columns: 1fr; } }
+  .h1 { font-size: clamp(2.5rem, 1.2rem + 4.6vw, 4.75rem); line-height: 1.15; font-weight: 700; letter-spacing: .01em; font-feature-settings: "palt"; }
+  .h2 { font-size: clamp(1.625rem, 1.2rem + 1.6vw, 2.5rem); line-height: 1.4; font-weight: 700; font-feature-settings: "palt"; }
+  .facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; }
+  .facts > div { padding: 0 24px; border-left: 1px solid var(--fact-line); }
+  .facts > div:first-child { padding-left: 0; border-left: 0; }
+  .facts dd:first-of-type { font-size: clamp(2rem, 1.5rem + 1.8vw, 3rem); font-weight: 500; line-height: 1; }
+  .facts small { font-size: .9375rem; margin-left: 4px; }
+  @media (max-width: 760px) { .facts { grid-template-columns: 1fr 1fr; row-gap: 24px; } .facts > div:nth-child(3) { padding-left: 0; border-left: 0; } }
+
+  /* ======================================================
+     DIRECTION A — 青空 Aozora Daylight
+     ====================================================== */
+  .A { --ink: #0A1A33; --sea: #0B2A5B; --sky: #1668E3; --sky-2: #7DB8FF; --mist: #EAF3FF; --coral: #FF6B4A; --coral-soft: #FFE9E3; --sand: #F7F3EC; --teal: #0E8F7E; --teal-soft: #E2F5F1; color: var(--ink); }
+  .A .hero { background: var(--sky); color: #fff; }
+  .A .hero__sky { padding: 88px 0 72px; }
+  .A .eyebrow { color: rgba(255,255,255,.8); }
+  .A .tag-en { margin-top: 20px; font-weight: 500; color: rgba(255,255,255,.85); }
+  .A .lead { margin-top: 24px; max-width: 34em; font-size: 1.0625rem; color: rgba(255,255,255,.92); }
+  .A .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+  .A .btn--coral { background: var(--coral); color: var(--ink); }
+  .A .btn--line { border-color: rgba(255,255,255,.6); color: #fff; }
+  .A .hero__sea { position: relative; background: var(--sea); padding: 40px 0 48px; --fact-line: rgba(255,255,255,.16); }
+  .A .hero__sea::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: linear-gradient(90deg, var(--coral) 0 120px, rgba(255,255,255,.35) 120px); }
+  .A .hero__sea .mono { color: var(--sky-2); margin-bottom: 20px; display: flex; justify-content: space-between; }
+  .A .facts dd + dd { color: rgba(255,255,255,.75); font-size: .875rem; margin-top: 10px; }
+  .A .cards-sec { background: var(--sand); padding: 72px 0; }
+  .A .card { position: relative; background: #fff; border-radius: 14px; padding: 28px; display: flex; flex-direction: column; gap: 14px; border: 1px solid rgba(10,26,51,.06); }
+  .A .card:hover { box-shadow: 0 12px 32px rgba(10,26,51,.10); }
+  .A .card__top { display: flex; justify-content: space-between; align-items: center; }
+  .A .card__icon { width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; background: var(--soft); color: var(--c); }
+  .A .card__icon svg { width: 28px; height: 28px; }
+  .A .chip { font-size: .75rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--soft); color: var(--c); }
+  .A .card h3 { font-size: 1.1875rem; line-height: 1.5; }
+  .A .card p { color: #3d4a5e; font-size: .9375rem; line-height: 1.8; }
+  .A .card__pain { margin-top: auto; padding: 12px 14px; border-radius: 10px; background: var(--sand); font-size: .8125rem; line-height: 1.7; color: var(--ink); }
+  .A .card__pain b { display: block; font-size: .6875rem; color: #6b7684; font-weight: 500; letter-spacing: .06em; }
+  .A .g-sales { --c: #D9472A; --soft: var(--coral-soft); }
+  .A .g-eff { --c: var(--sky); --soft: var(--mist); }
+  .A .g-protect { --c: var(--teal); --soft: var(--teal-soft); }
+  .A .model { background: var(--sea); color: #fff; padding: 80px 0; }
+  .A .model .mono { color: var(--sky-2); }
+  .A .eq { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1.2fr; align-items: center; gap: 16px; margin-top: 40px; }
+  .A .eq__b { padding: 24px; border-radius: 14px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); }
+  .A .eq__b strong { display: block; font-size: 2.75rem; line-height: 1; font-weight: 500; }
+  .A .eq__b span { display: block; margin-top: 8px; font-size: .875rem; color: rgba(255,255,255,.8); }
+  .A .eq__op { font-size: 2rem; color: var(--coral); font-weight: 300; }
+  .A .eq__r { padding: 24px; border-radius: 14px; background: var(--sky); font-weight: 700; font-size: 1.125rem; line-height: 1.5; }
+  @media (max-width: 960px) { .A .eq { grid-template-columns: 1fr; } .A .eq__op { text-align: center; } }
+
+  /* ======================================================
+     DIRECTION B — Blueprint Ink
+     ====================================================== */
+  .B { --ink: #0B1020; --ink-2: #161D33; --electric: #4C7DFF; --electric-soft: #E8EEFF; --lime: #C8F169; --cloud: #EEF1F6; --slate: #5B6478; --line: #DDE2EC; color: var(--ink); }
+  .B .hero { position: relative; background: var(--ink); color: #fff; padding: 96px 0 56px; overflow: hidden; --fact-line: rgba(255,255,255,.14); }
+  .B .hero::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 48px 48px; pointer-events: none; }
+  .B .hero > * { position: relative; }
+  .B .eyebrow { color: var(--lime); }
+  .B .h1 em { font-style: normal; color: var(--electric); }
+  .B .tag-en { margin-top: 20px; color: rgba(255,255,255,.6); font-family: "IBM Plex Mono", monospace; font-size: .875rem; }
+  .B .lead { margin-top: 24px; max-width: 34em; font-size: 1.0625rem; color: rgba(255,255,255,.78); }
+  .B .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+  .B .btn--el { background: var(--electric); color: #fff; }
+  .B .btn--line { border-color: rgba(255,255,255,.3); color: #fff; }
+  .B .facts-wrap { margin-top: 72px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.14); }
+  .B .facts dd:first-of-type { font-family: "IBM Plex Mono", monospace; }
+  .B .facts dd + dd { color: rgba(255,255,255,.6); font-size: .875rem; margin-top: 10px; }
+  .B .cards-sec { background: var(--cloud); padding: 72px 0; }
+  .B .card { position: relative; overflow: hidden; background: #fff; border: 1px solid var(--line); border-radius: 4px; padding: 32px 28px 28px; display: flex; flex-direction: column; gap: 14px; min-height: 320px; }
+  .B .card:hover { border-color: var(--electric); }
+  .B .card__num { position: absolute; right: 16px; top: -10px; font-family: "IBM Plex Mono", monospace; font-size: 6rem; line-height: 1; font-weight: 500; color: transparent; -webkit-text-stroke: 1px var(--line); }
+  .B .card__icon { width: 52px; height: 52px; display: grid; place-items: center; background: var(--ink); color: var(--c); border-radius: 4px; }
+  .B .card__icon svg { width: 26px; height: 26px; }
+  .B .card__tag { font-family: "IBM Plex Mono", monospace; font-size: .6875rem; letter-spacing: .12em; color: var(--slate); display: flex; align-items: center; gap: 8px; }
+  .B .card__tag::before { content: ""; width: 14px; height: 2px; background: var(--c); }
+  .B .card h3 { font-size: 1.1875rem; line-height: 1.5; }
+  .B .card p { color: var(--slate); font-size: .9375rem; line-height: 1.8; }
+  .B .card__pain { margin-top: auto; padding-top: 14px; border-top: 1px dashed var(--line); font-size: .8125rem; color: var(--ink); }
+  .B .card__pain b { color: var(--slate); font-weight: 500; margin-right: 6px; }
+  .B .g-sales { --c: #FFB547; }
+  .B .g-eff { --c: var(--electric); }
+  .B .g-protect { --c: var(--lime); }
+  .B .bento-sec { background: #fff; padding: 80px 0; }
+  .B .bento { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-auto-rows: minmax(180px, auto); gap: 16px; margin-top: 40px; }
+  .B .bento > div { border: 1px solid var(--line); border-radius: 4px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; }
+  .B .bento .big { grid-column: span 4; grid-row: span 2; background: var(--ink); color: #fff; border-color: var(--ink); }
+  .B .bento .big p.q { font-size: clamp(1.375rem, 1rem + 1.2vw, 2rem); font-weight: 700; line-height: 1.5; }
+  .B .bento .big .mono { color: var(--lime); }
+  .B .bento .sm { grid-column: span 2; }
+  .B .bento .wide { grid-column: span 3; background: var(--electric-soft); border-color: transparent; }
+  .B .bento h3 { font-size: 1.0625rem; }
+  .B .bento p { font-size: .875rem; color: var(--slate); }
+  .B .bento .big p { color: rgba(255,255,255,.75); }
+  .B .bento svg { width: 28px; height: 28px; color: var(--electric); }
+  @media (max-width: 960px) { .B .bento { grid-template-columns: 1fr; } .B .bento > div { grid-column: auto !important; grid-row: auto !important; } }
+
+  /* ======================================================
+     DIRECTION C — Indigo × Marigold (Two horizons)
+     ====================================================== */
+  .C { --ai: #1E2A5A; --ai-2: #2D3B78; --shu: #C23B22; --marigold: #F0A429; --teal: #1F9C8B; --washi: #FBF7F0; --ink: #1A1F2E; --muted: #5B6070; --line: #E7E0D2; color: var(--ink); }
+  .C .hero { background: var(--washi); padding: 88px 0 0; }
+  .C .eyebrow { color: var(--shu); }
+  .C .h1 { color: var(--ai); }
+  .C .h1 .dot { color: var(--shu); }
+  .C .tag-en { margin-top: 20px; color: var(--muted); font-weight: 500; }
+  .C .lead { margin-top: 24px; max-width: 34em; font-size: 1.0625rem; color: #3a3f4e; }
+  .C .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+  .C .btn--shu { background: var(--shu); color: #fff; }
+  .C .btn--line { border-color: var(--ai); color: var(--ai); }
+  .C .hero__band { margin-top: 64px; background: var(--ai); color: #fff; padding: 40px 0 48px; --fact-line: rgba(255,255,255,.16); }
+  .C .facts dd + dd { color: rgba(255,255,255,.75); font-size: .875rem; margin-top: 10px; }
+  .C .facts dd:first-of-type small { color: var(--marigold); }
+  .C .cards-sec { background: #fff; padding: 72px 0; }
+  .C .card { display: grid; grid-template-columns: 6px 1fr; background: var(--washi); border-radius: 10px; overflow: hidden; }
+  .C .card::before { content: ""; background: var(--c); }
+  .C .card__in { padding: 28px 26px; display: flex; flex-direction: column; gap: 14px; }
+  .C .card__icon { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: var(--c); color: #fff; }
+  .C .card__icon svg { width: 24px; height: 24px; }
+  .C .card__tag { font-size: .75rem; font-weight: 700; color: var(--c); }
+  .C .card h3 { font-size: 1.1875rem; line-height: 1.5; color: var(--ai); }
+  .C .card p { color: var(--muted); font-size: .9375rem; line-height: 1.8; }
+  .C .card__pain { margin-top: auto; font-size: .8125rem; color: var(--ink); padding-top: 12px; border-top: 1px solid var(--line); }
+  .C .card__pain b { color: var(--muted); font-weight: 500; margin-right: 6px; }
+  .C .g-sales { --c: var(--shu); }
+  .C .g-eff { --c: var(--ai-2); }
+  .C .g-protect { --c: var(--teal); }
+  .C .hours-sec { background: var(--ai); color: #fff; padding: 80px 0; }
+  .C .hours-sec .mono { color: var(--marigold); }
+  .C .bars { margin-top: 40px; display: grid; gap: 14px; }
+  .C .bar-row { display: grid; grid-template-columns: 120px 1fr; align-items: center; gap: 16px; }
+  .C .track { position: relative; height: 40px; background: rgba(255,255,255,.08); border-radius: 6px; }
+  .C .track span { position: absolute; top: 0; bottom: 0; border-radius: 6px; display: flex; align-items: center; padding: 0 12px; font-family: "IBM Plex Mono", monospace; font-size: .8125rem; }
+  .C .scale { display: grid; grid-template-columns: 120px 1fr; gap: 16px; font-family: "IBM Plex Mono", monospace; font-size: .75rem; color: rgba(255,255,255,.55); }
+  .C .scale div { position: relative; height: 16px; }
+  .C .scale span { position: absolute; transform: translateX(-50%); }
+  </style>
+</head>
+<body>
+  <div class="wrap intro">
+    <p class="mono">AOZORA · Visual directions</p>
+    <h1>3つのビジュアル方向性（比較用）</h1>
+    <p>各案で、配色・ヒーロー・サービスカード・セクションの見せ方の例を示しています。内容と機能は現行サイトのままです。色・図・アイコンは、どれも内容を伝えるために使っています（サービスの分類、作る／守る、日本とネパールの連携など）。</p>
+    <nav class="jump"><a href="#A">A　青空 Daylight</a><a href="#B">B　Blueprint Ink</a><a href="#C">C　Indigo × Marigold</a></nav>
+  </div>
+
+  <!-- ============================== A ============================== -->
+  <section class="dir wrap" id="A">
+    <div class="dir__head">
+      <div>
+        <p class="mono">Direction A</p>
+        <h2>青空 Daylight<br>— 社名そのものを、ビジュアルに。</h2>
+        <p class="dir__concept">ヒーロー全体を「青空」の色で満たし、水平線（既存のモチーフ）の下を「海」の濃紺にします。<b>作る＝空、守る＝海</b>。沖縄らしいハイビスカスのコーラルを、行動を促すボタンだけに使います。明るく、親しみやすく、社名を一目で覚えてもらえる方向性です。</p>
+      </div>
+      <div class="dir__notes">
+        <p><b>STRENGTH</b>社名・沖縄との結びつきが最も強い。明るく信頼感があり、中小企業のお客様にも親しみやすい。</p>
+        <p><b>WATCH</b>青の面積が大きいため、2つ目以降の青い面は控えめにする必要があります。</p>
+        <p><b>ICONS</b>グループ色の淡い角丸タイル＋線アイコン（コーラル＝売上、青＝効率化、ティール＝守る）。</p>
+      </div>
+      <div class="swatches">
+        <div class="sw"><i style="background:#1668E3"></i><span><b>Aozora Blue</b>#1668E3<br>ヒーロー・主要色</span></div>
+        <div class="sw"><i style="background:#0B2A5B"></i><span><b>Deep Sea</b>#0B2A5B<br>濃色の帯・守る</span></div>
+        <div class="sw"><i style="background:#FF6B4A"></i><span><b>Hibiscus Coral</b>#FF6B4A<br>CTA・売上（文字は濃紺）</span></div>
+        <div class="sw"><i style="background:#0E8F7E"></i><span><b>Reef Teal</b>#0E8F7E<br>守る（セキュリティ等）</span></div>
+        <div class="sw"><i style="background:#7DB8FF"></i><span><b>Light Sky</b>#7DB8FF<br>濃色上のラベル</span></div>
+        <div class="sw"><i style="background:#F7F3EC"></i><span><b>Sand</b>#F7F3EC<br>背景</span></div>
+        <div class="sw"><i style="background:#0A1A33"></i><span><b>Ink</b>#0A1A33<br>本文</span></div>
+      </div>
+    </div>
+    <div class="label">Example — Hero</div>
+    <div class="frame A">
+      <div class="hero">
+        <div class="hero__sky">
+          <div class="s-container hero-grid">
+            <div>
+              <p class="mono eyebrow">One-stop IT partner</p>
+              <h1 class="h1" style="margin-top:20px">作るも守るも、<br>同じチーム。</h1>
+              <p class="tag-en">We build it. We protect it. One team.</p>
+              <p class="lead">ITの力で、売上を伸ばし、コストを下げる。ご相談から開発、セキュリティ、保守運用まで、ひとつの窓口で伴走するITパートナーです。</p>
+              <div class="actions"><a class="btn btn--coral" href="#A">無料IT診断を相談する<i data-lucide="arrow-right"></i></a><a class="btn btn--line" href="#A">自社に合うサービスを探す</a></div>
+            </div>
+            <svg viewBox="0 0 440 380" role="img" aria-label="作る（空）と守る（海）の循環">
+              <circle cx="220" cy="200" r="130" fill="none" stroke="rgba(255,255,255,.25)"/>
+              <circle cx="220" cy="200" r="130" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-dasharray="313 817" transform="rotate(-86 220 200)"/>
+              <circle cx="220" cy="200" r="130" fill="none" stroke="#FF6B4A" stroke-width="3" stroke-linecap="round" stroke-dasharray="472 817" transform="rotate(58 220 200)"/>
+              <g fill="#fff"><circle cx="220" cy="70" r="7"/><circle cx="343.6" cy="159.8" r="7"/><circle cx="296.4" cy="305.2" r="7"/></g>
+              <g fill="#FF6B4A"><circle cx="143.6" cy="305.2" r="7"/><circle cx="96.4" cy="159.8" r="7"/></g>
+              <g font-family="IBM Plex Sans JP" font-size="14" font-weight="700" fill="#fff">
+                <text x="220" y="48" text-anchor="middle">コンサル</text><text x="360" y="165">補助金活用</text><text x="312" y="345">開発</text>
+                <text x="128" y="345" text-anchor="end">セキュリティ</text><text x="80" y="165" text-anchor="end">保守・運用</text>
+              </g>
+              <text x="220" y="190" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" letter-spacing="3" fill="rgba(255,255,255,.75)">BUILD · PROTECT</text>
+              <text x="220" y="222" text-anchor="middle" font-family="IBM Plex Sans JP" font-size="22" font-weight="700" fill="#fff">ONE TEAM</text>
+            </svg>
+          </div>
+        </div>
+        <div class="hero__sea">
+          <div class="s-container">
+            <p class="mono"><span>Since 2011</span><span>Okinawa · Tokyo · Kathmandu</span></p>
+            <dl class="facts">
+              <div><dt hidden>設立</dt><dd>2011<small>年</small></dd><dd>設立</dd></div>
+              <div><dt hidden>年間</dt><dd>150<small>件以上</small></dd><dd>年間プロジェクト</dd></div>
+              <div><dt hidden>メンバー</dt><dd>37<small>名</small></dd><dd>日本12名・ネパール25名</dd></div>
+              <div><dt hidden>領域</dt><dd>9<small>分野</small></dd><dd>対応領域</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="label">Example — Service cards（グループ色のアイコンタイル＋「こんなお悩みに」）</div>
+    <div class="frame A">
+      <div class="cards-sec">
+        <div class="s-container cards3">
+          <article class="card g-sales"><div class="card__top"><span class="card__icon"><i data-lucide="globe"></i></span><span class="chip">売上を伸ばす</span></div><h3>Web制作・WordPress</h3><p>見た目だけで終わらない、問い合わせや採用につながるサイトを。</p><p class="card__pain"><b>こんなお悩みに</b>サイトが古く、スマホで見づらい</p></article>
+          <article class="card g-eff"><div class="card__top"><span class="card__icon"><i data-lucide="bot"></i></span><span class="chip">業務を効率化する</span></div><h3>AI活用・業務の自動化</h3><p>毎日の手作業を減らし、人にしかできない仕事に時間を。</p><p class="card__pain"><b>こんなお悩みに</b>毎月、同じ集計や転記をしている</p></article>
+          <article class="card g-protect"><div class="card__top"><span class="card__icon"><i data-lucide="shield-check"></i></span><span class="chip">安心して使い続ける</span></div><h3>セキュリティ診断・対策</h3><p>弱点を、攻撃者より先に見つける。日本のプロが診断と対策を行います。</p><p class="card__pain"><b>こんなお悩みに</b>取引先からセキュリティの確認を求められた</p></article>
+        </div>
+      </div>
+    </div>
+    <div class="label">Example — Section variety（体制を「式」として大きく見せる）</div>
+    <div class="frame A">
+      <div class="model">
+        <div class="s-container">
+          <p class="mono">How we deliver · Japan × Nepal × AI</p>
+          <h2 class="h2" style="margin-top:16px">日本の品質管理と、ネパールの開発力と、AI。</h2>
+          <div class="eq">
+            <div class="eq__b"><strong>12</strong><span>日本チーム<br>窓口・要件・設計・品質管理</span></div>
+            <div class="eq__op">+</div>
+            <div class="eq__b"><strong>25</strong><span>Parijat（ネパール）<br>開発・QA</span></div>
+            <div class="eq__op">+</div>
+            <div class="eq__b"><strong>AI</strong><span>作成・テスト・資料<br>レビューは必ず人が</span></div>
+            <div class="eq__op">=</div>
+            <div class="eq__r">日本品質の、<br>効率的な開発</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== B ============================== -->
+  <section class="dir wrap" id="B">
+    <div class="dir__head">
+      <div>
+        <p class="mono">Direction B</p>
+        <h2>Blueprint Ink<br>— 技術力を、設計図のように。</h2>
+        <p class="dir__concept">濃いインクの背景に、細い方眼（設計図）を敷いたヒーロー。<b>精度と技術力</b>を伝えます。強い青（エレクトリック）と、ライム色の「信号」を最小限に。サービスカードには大きな番号を入れ、9つの領域を覚えやすくします。</p>
+      </div>
+      <div class="dir__notes">
+        <p><b>STRENGTH</b>最もモダンでテック企業らしい印象。コントラストが高く、ヒーローのインパクトが強い。</p>
+        <p><b>WATCH</b>沖縄・ネパールの温かみは出しにくい。中小企業のお客様には少し硬く感じられる可能性があります。</p>
+        <p><b>ICONS</b>濃色の角タイル＋グループ色の線アイコン。番号を大きく見せ、一覧性を高めます。</p>
+      </div>
+      <div class="swatches">
+        <div class="sw"><i style="background:#0B1020"></i><span><b>Ink</b>#0B1020<br>ヒーロー・濃色面</span></div>
+        <div class="sw"><i style="background:#4C7DFF"></i><span><b>Electric Blue</b>#4C7DFF<br>主要色・効率化</span></div>
+        <div class="sw"><i style="background:#C8F169"></i><span><b>Signal Lime</b>#C8F169<br>守る・濃色上の強調のみ</span></div>
+        <div class="sw"><i style="background:#FFB547"></i><span><b>Amber</b>#FFB547<br>売上（濃色上のみ）</span></div>
+        <div class="sw"><i style="background:#EEF1F6"></i><span><b>Cloud</b>#EEF1F6<br>背景</span></div>
+        <div class="sw"><i style="background:#5B6478"></i><span><b>Slate</b>#5B6478<br>補足テキスト</span></div>
+      </div>
+    </div>
+    <div class="label">Example — Hero</div>
+    <div class="frame B">
+      <div class="hero">
+        <div class="s-container hero-grid">
+          <div>
+            <p class="mono eyebrow">One-stop IT partner</p>
+            <h1 class="h1" style="margin-top:20px">作るも守るも、<br><em>同じチーム。</em></h1>
+            <p class="tag-en">We build it. We protect it. One team.</p>
+            <p class="lead">ITの力で、売上を伸ばし、コストを下げる。ご相談から開発、セキュリティ、保守運用まで、ひとつの窓口で伴走するITパートナーです。</p>
+            <div class="actions"><a class="btn btn--el" href="#B">無料IT診断を相談する<i data-lucide="arrow-right"></i></a><a class="btn btn--line" href="#B">自社に合うサービスを探す</a></div>
+          </div>
+          <svg viewBox="0 0 440 380" role="img" aria-label="作ると守るの循環を示す設計図風の図">
+            <circle cx="220" cy="200" r="160" fill="none" stroke="rgba(255,255,255,.12)" stroke-dasharray="3 6"/>
+            <line x1="40" y1="200" x2="400" y2="200" stroke="rgba(255,255,255,.12)" stroke-dasharray="3 6"/>
+            <line x1="220" y1="20" x2="220" y2="370" stroke="rgba(255,255,255,.12)" stroke-dasharray="3 6"/>
+            <circle cx="220" cy="200" r="130" fill="none" stroke="#4C7DFF" stroke-width="2" stroke-dasharray="313 817" transform="rotate(-86 220 200)"/>
+            <circle cx="220" cy="200" r="130" fill="none" stroke="#C8F169" stroke-width="2" stroke-dasharray="472 817" transform="rotate(58 220 200)"/>
+            <g fill="#0B1020" stroke-width="2"><circle cx="220" cy="70" r="7" stroke="#4C7DFF"/><circle cx="343.6" cy="159.8" r="7" stroke="#4C7DFF"/><circle cx="296.4" cy="305.2" r="7" stroke="#4C7DFF"/><circle cx="143.6" cy="305.2" r="7" stroke="#C8F169"/><circle cx="96.4" cy="159.8" r="7" stroke="#C8F169"/></g>
+            <g font-family="IBM Plex Mono" font-size="10" fill="rgba(255,255,255,.5)" letter-spacing="2"><text x="220" y="30" text-anchor="middle">01</text><text x="360" y="146">02</text><text x="312" y="328">03</text><text x="128" y="328" text-anchor="end">04</text><text x="80" y="146" text-anchor="end">05</text></g>
+            <g font-family="IBM Plex Sans JP" font-size="13" font-weight="500" fill="#fff"><text x="220" y="48" text-anchor="middle">コンサル</text><text x="360" y="164">補助金活用</text><text x="312" y="346">開発</text><text x="128" y="346" text-anchor="end">セキュリティ</text><text x="80" y="164" text-anchor="end">保守・運用</text></g>
+            <text x="220" y="194" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" letter-spacing="3" fill="#C8F169">BUILD / PROTECT</text>
+            <text x="220" y="222" text-anchor="middle" font-family="IBM Plex Sans JP" font-size="20" font-weight="700" fill="#fff">ONE TEAM</text>
+          </svg>
+        </div>
+        <div class="s-container facts-wrap">
+          <dl class="facts">
+            <div><dt hidden>設立</dt><dd>2011<small>年</small></dd><dd>設立</dd></div>
+            <div><dt hidden>年間</dt><dd>150<small>件以上</small></dd><dd>年間プロジェクト</dd></div>
+            <div><dt hidden>メンバー</dt><dd>37<small>名</small></dd><dd>日本12名・ネパール25名</dd></div>
+            <div><dt hidden>領域</dt><dd>9<small>分野</small></dd><dd>対応領域</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="label">Example — Service cards（大きな番号＋濃色アイコンタイル）</div>
+    <div class="frame B">
+      <div class="cards-sec">
+        <div class="s-container cards3">
+          <article class="card g-sales"><span class="card__num">01</span><span class="card__icon"><i data-lucide="globe"></i></span><p class="card__tag">GROW SALES</p><h3>Web制作・WordPress</h3><p>見た目だけで終わらない、問い合わせや採用につながるサイトを。</p><p class="card__pain"><b>こんなお悩みに</b>サイトが古く、スマホで見づらい</p></article>
+          <article class="card g-eff"><span class="card__num">06</span><span class="card__icon"><i data-lucide="bot"></i></span><p class="card__tag">WORK EFFICIENTLY</p><h3>AI活用・業務の自動化</h3><p>毎日の手作業を減らし、人にしかできない仕事に時間を。</p><p class="card__pain"><b>こんなお悩みに</b>毎月、同じ集計や転記をしている</p></article>
+          <article class="card g-protect"><span class="card__num">08</span><span class="card__icon"><i data-lucide="shield-check"></i></span><p class="card__tag">STAY SAFE</p><h3>セキュリティ診断・対策</h3><p>弱点を、攻撃者より先に見つける。日本のプロが診断と対策を行います。</p><p class="card__pain"><b>こんなお悩みに</b>取引先からセキュリティの確認を求められた</p></article>
+        </div>
+      </div>
+    </div>
+    <div class="label">Example — Section variety（「選ばれる理由」をベントー型グリッドで）</div>
+    <div class="frame B">
+      <div class="bento-sec">
+        <div class="s-container">
+          <p class="mono" style="color:#5B6478">Why AOZORA</p>
+          <h2 class="h2" style="margin-top:16px">作る前から、作った後まで。</h2>
+          <div class="bento">
+            <div class="big"><p class="mono">01</p><p class="q">まず「何をすべきか」から考えます。いきなり作らず、業務・IT環境・費用を見える化してから。</p></div>
+            <div class="sm"><i data-lucide="message-square"></i><div><h3>最善の案を率直に</h3><p>ご要望と違っても、プロとして最善の案をお伝えします。</p></div></div>
+            <div class="sm"><i data-lucide="workflow"></i><div><h3>窓口はひとつ</h3><p>コンサルから保守運用まで一社で。</p></div></div>
+            <div class="wide"><i data-lucide="refresh-ccw"></i><div><h3>作って終わりにしません</h3><p>運用データから、売上アップ・コストダウンの次の一手を。</p></div></div>
+            <div class="wide"><i data-lucide="clipboard-check"></i><div><h3>日本式の進行・品質管理</h3><p>仕様書で合意し、別のエンジニアがレビュー、専任QAがテスト。</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== C ============================== -->
+  <section class="dir wrap" id="C">
+    <div class="dir__head">
+      <div>
+        <p class="mono">Direction C</p>
+        <h2>Indigo × Marigold<br>— 日本とネパール、2つの地平線。</h2>
+        <p class="dir__concept">日本の<b>藍（インディゴ）と朱</b>に、ネパールを思わせる<b>マリーゴールド</b>を合わせた、温かみのある配色。ヒーローの線画は、沖縄の海とヒマラヤの稜線を<b>1本の水平線</b>でつなぎ、「国を越えたひとつのチーム」を表します。</p>
+      </div>
+      <div class="dir__notes">
+        <p><b>STRENGTH</b>Japan × Nepal のストーリーが最も伝わる。上品で温かく、他社と差別化しやすい。</p>
+        <p><b>WATCH</b>テック企業らしさはAより控えめ。朱は小さな文字に使わず、ボタンと強調に限定します。</p>
+        <p><b>ICONS</b>グループ色の丸い印（はんこのような形）＋白い線アイコン、カード左端の色帯。</p>
+      </div>
+      <div class="swatches">
+        <div class="sw"><i style="background:#1E2A5A"></i><span><b>藍 Indigo</b>#1E2A5A<br>見出し・濃色面</span></div>
+        <div class="sw"><i style="background:#C23B22"></i><span><b>朱 Vermilion</b>#C23B22<br>CTA・売上・日本</span></div>
+        <div class="sw"><i style="background:#F0A429"></i><span><b>Marigold</b>#F0A429<br>ネパール（濃色上のみ）</span></div>
+        <div class="sw"><i style="background:#1F9C8B"></i><span><b>Teal</b>#1F9C8B<br>守る・沖縄の海</span></div>
+        <div class="sw"><i style="background:#FBF7F0"></i><span><b>Washi</b>#FBF7F0<br>背景</span></div>
+        <div class="sw"><i style="background:#1A1F2E"></i><span><b>Ink</b>#1A1F2E<br>本文</span></div>
+      </div>
+    </div>
+    <div class="label">Example — Hero</div>
+    <div class="frame C">
+      <div class="hero">
+        <div class="s-container hero-grid">
+          <div>
+            <p class="mono eyebrow">One-stop IT partner</p>
+            <h1 class="h1" style="margin-top:20px">作るも守るも<span class="dot">、</span><br>同じチーム<span class="dot">。</span></h1>
+            <p class="tag-en">We build it. We protect it. One team.</p>
+            <p class="lead">ITの力で、売上を伸ばし、コストを下げる。ご相談から開発、セキュリティ、保守運用まで、ひとつの窓口で伴走するITパートナーです。</p>
+            <div class="actions"><a class="btn btn--shu" href="#C">無料IT診断を相談する<i data-lucide="arrow-right"></i></a><a class="btn btn--line" href="#C">自社に合うサービスを探す</a></div>
+          </div>
+          <svg viewBox="0 0 460 340" role="img" aria-label="沖縄の海とヒマラヤの稜線を、1本の水平線がつなぐ線画">
+            <circle cx="330" cy="120" r="46" fill="#F0A429" opacity=".9"/>
+            <path d="M200 230 L262 150 L292 182 L338 108 L378 160 L410 132 L460 196 L460 230 Z" fill="#1E2A5A"/>
+            <path d="M262 150 L276 168 L262 172 L250 166 Z M338 108 L352 130 L336 136 L326 126 Z" fill="#fff" opacity=".9"/>
+            <path d="M0 236 Q 30 222 60 236 T 120 236 T 180 236" fill="none" stroke="#1F9C8B" stroke-width="3" stroke-linecap="round"/>
+            <path d="M0 256 Q 30 242 60 256 T 120 256 T 180 256" fill="none" stroke="#1F9C8B" stroke-width="3" stroke-linecap="round" opacity=".6"/>
+            <path d="M0 276 Q 30 262 60 276 T 120 276 T 180 276" fill="none" stroke="#1F9C8B" stroke-width="3" stroke-linecap="round" opacity=".3"/>
+            <line x1="0" y1="230" x2="460" y2="230" stroke="#C23B22" stroke-width="2"/>
+            <circle cx="96" cy="230" r="6" fill="#C23B22"/><circle cx="376" cy="230" r="6" fill="#C23B22"/>
+            <g font-family="IBM Plex Mono" font-size="11" letter-spacing="2" fill="#5B6070"><text x="96" y="312" text-anchor="middle">OKINAWA · TOKYO</text><text x="376" y="312" text-anchor="middle">KATHMANDU</text></g>
+            <g font-family="IBM Plex Sans JP" font-size="13" font-weight="700" fill="#1E2A5A"><text x="96" y="294" text-anchor="middle">日本チーム 12名</text><text x="376" y="294" text-anchor="middle">Parijat 25名</text></g>
+            <text x="236" y="252" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" letter-spacing="3" fill="#C23B22">ONE TEAM</text>
+          </svg>
+        </div>
+        <div class="hero__band">
+          <div class="s-container">
+            <dl class="facts">
+              <div><dt hidden>設立</dt><dd>2011<small>年</small></dd><dd>設立</dd></div>
+              <div><dt hidden>年間</dt><dd>150<small>件以上</small></dd><dd>年間プロジェクト</dd></div>
+              <div><dt hidden>メンバー</dt><dd>37<small>名</small></dd><dd>日本12名・ネパール25名</dd></div>
+              <div><dt hidden>領域</dt><dd>9<small>分野</small></dd><dd>対応領域</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="label">Example — Service cards（左端の色帯＋丸い印のアイコン）</div>
+    <div class="frame C">
+      <div class="cards-sec">
+        <div class="s-container cards3">
+          <article class="card g-sales"><div class="card__in"><span class="card__icon"><i data-lucide="globe"></i></span><p class="card__tag">売上を伸ばす</p><h3>Web制作・WordPress</h3><p>見た目だけで終わらない、問い合わせや採用につながるサイトを。</p><p class="card__pain"><b>こんなお悩みに</b>サイトが古く、スマホで見づらい</p></div></article>
+          <article class="card g-eff"><div class="card__in"><span class="card__icon"><i data-lucide="bot"></i></span><p class="card__tag">業務を効率化する</p><h3>AI活用・業務の自動化</h3><p>毎日の手作業を減らし、人にしかできない仕事に時間を。</p><p class="card__pain"><b>こんなお悩みに</b>毎月、同じ集計や転記をしている</p></div></article>
+          <article class="card g-protect"><div class="card__in"><span class="card__icon"><i data-lucide="shield-check"></i></span><p class="card__tag">安心して使い続ける</p><h3>セキュリティ診断・対策</h3><p>弱点を、攻撃者より先に見つける。日本のプロが診断と対策を行います。</p><p class="card__pain"><b>こんなお悩みに</b>取引先からセキュリティの確認を求められた</p></div></article>
+        </div>
+      </div>
+    </div>
+    <div class="label">Example — Section variety（稼働時間の重なりを主役に）</div>
+    <div class="frame C">
+      <div class="hours-sec">
+        <div class="s-container">
+          <p class="mono">Same-day collaboration</p>
+          <h2 class="h2" style="margin-top:16px">日本の昼から夜まで、開発チームが動いています。</h2>
+          <div class="bars">
+            <div class="scale"><span></span><div><span style="left:7.1%">9:00</span><span style="left:28.6%">12:00</span><span style="left:50%">15:00</span><span style="left:71.4%">18:00</span><span style="left:92.9%">21:00</span></div></div>
+            <div class="bar-row"><b>日本</b><div class="track"><span style="left:7.1%;width:64.3%;background:#C23B22">9:00–18:00</span></div></div>
+            <div class="bar-row"><b>Parijat</b><div class="track"><span style="left:30.4%;width:64.3%;background:#F0A429;color:#1E2A5A">12:15–21:15</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap" style="padding-bottom:64px;color:#444;font-size:.875rem">どの案でも、アニメーションは最小限（ホバー時の色変化と、セクション表示時の静かなフェードのみ）にします。</div>
+
+  <script>window.addEventListener('load', () => window.lucide && lucide.createIcons({ attrs: { 'stroke-width': 1.75 } }));</script>
+</body>
+</html>
